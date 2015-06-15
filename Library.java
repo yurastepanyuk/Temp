@@ -1,4 +1,4 @@
-package day4;
+package TEMP;
 
 //IDEA:
 //		1) Dlya realisacii bustrogo poiska po naimenovaniyu, avtoru i kategorii ispolzuem arrays so strukturoy kak u indexa - po alfavitu
