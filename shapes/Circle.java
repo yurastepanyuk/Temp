@@ -24,6 +24,6 @@ public class Circle extends Shape {
     }
 
     public void setR(int r) {
-        this.r = r;
+        this.r = r; 
     }
 }
