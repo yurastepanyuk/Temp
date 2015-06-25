@@ -9,7 +9,7 @@ public class Theater {
 
     public static void main(String[] args) {
         Theater theater = new Theater();
-        theater.actor = new HappyActor(); 
+        theater.actor = new HappyActor();  
 
         theater.actor.act();
         
