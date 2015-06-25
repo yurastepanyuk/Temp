@@ -5,6 +5,6 @@ package day6.StatePattern;
  */
 public interface Actor {
 
-    public void act();
+    public void act(); 
 
 }

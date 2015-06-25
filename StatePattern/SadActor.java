@@ -6,6 +6,6 @@ package day6.StatePattern;
 public class SadActor implements Actor{
     @Override
     public void act() {
-        System.out.println("I am bad actor...");
+        System.out.println("I am bad actor..."); 
     }
 }

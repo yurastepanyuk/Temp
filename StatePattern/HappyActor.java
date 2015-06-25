@@ -7,6 +7,6 @@ public class HappyActor implements Actor {
 
     @Override
     public void act() {
-        System.out.println("I am great actor!");
+        System.out.println("I am great actor!"); 
     }
 }
