@@ -19,7 +19,7 @@ public class Launcher {
         circle.setX(50);
         circle.setY(50);
         draws[0] = circle;
-        paint.painting(circle, 1);
+        paint.painting(circle);
 
         //Override method in rectangle
         rectangle.setX(100);
@@ -27,13 +27,13 @@ public class Launcher {
         rectangle.setWidth(50);
         rectangle.setHight(100);
         draws[1] = rectangle;
-        paint.painting(rectangle, 1);
+        paint.painting(rectangle);
 
         //Override method in Circle
         triangle.setxCoordinats(new int []{200, 170, 230});
         triangle.setyCoordinates(new int[]{50,220,220});
         draws[2] = triangle;
-        paint.painting(triangle, 1);
+        paint.painting(triangle);
 
 
     }

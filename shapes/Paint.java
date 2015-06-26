@@ -30,7 +30,7 @@ public class Paint extends JPanel {
         //repaint();
     }
 
-    public void painting(Shape figure, int visible){
+    public void painting(Shape figure){
 
         this.shapes[qtyShapes + 1] = figure;
         this.qtyShapes = qtyShapes + 1;
