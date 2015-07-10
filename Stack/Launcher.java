@@ -1,5 +1,8 @@
 package day7.Stack;
 
+/**
+ * Created by stepanyuk on 10.07.2015.
+ */
 public class Launcher {
 
     public static void main(String[] args) {
