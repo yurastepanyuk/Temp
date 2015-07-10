@@ -4,7 +4,7 @@ public class Stack {
 
     Node last;
 
-    public void push(Object obj){
+    public void push(Object obj){ 
         Node newNode = new Node();
         newNode.value = obj;
         if (last != null) {

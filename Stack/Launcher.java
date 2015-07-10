@@ -2,7 +2,7 @@ package day7.Stack;
 
 public class Launcher {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { 
         Stack stack = new Stack();
 
         stack.push("Pasha");
@@ -23,7 +23,7 @@ public class Launcher {
         System.out.println("//*******************************" +
                 "");
 
-        stack.printStack();
+        stack.printStack(); 
 
     }
 
