@@ -1,7 +1,7 @@
 package day7.Stack;
 
 public class Stack {
-
+  
     Node last;
 
     public void push(Object obj){
