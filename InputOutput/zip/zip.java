@@ -1,18 +1,18 @@
 package day11.zip;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class zip {
+public class Zip {
+
+    public static String pathFolderInput  = System.getProperty("user.dir") + "\\src\\day11\\readerwriter";
+    public static  String pathFolderOut   = System.getProperty("user.dir") + "\\src\\day11\\zip";
 
     public static void main(String[] args) throws IOException {
-
-        String pathFolderInput = System.getProperty("user.dir") + "\\src\\day11\\readerwriter";
-        String pathFolderOut   = System.getProperty("user.dir") + "\\src\\day11\\zip";
-
 
         if (args.length > 0) {
             pathFolderInput = args[0];
@@ -27,13 +27,34 @@ public class zip {
 
         String [] listFiles = fileInputFolder.list();
 
+        packZipToList(zout, listFiles, pathFolderInput, null);
+
+        out.close();
+    }
+
+    private static void packZipToList(ZipOutputStream zout,  String [] listFiles, String pathInput, String pathOut) throws IOException {
+
         for (String curNameFile : listFiles) {
 
+            File curFile = new File(pathInput + "\\" + curNameFile);
 
-            File curFile = new File(pathFolderInput + "\\" + curNameFile);
+            String pathOutNew = (pathOut == null)?"" : pathOut + "\\";
+
+            if (curFile.isDirectory()) {
+
+                ZipEntry ze = new ZipEntry(pathOutNew + curNameFile+"\\");
+                zout.putNextEntry(ze);
+                zout.closeEntry();
+
+                String [] listFilesNext = curFile.list();
+
+                packZipToList(zout, listFilesNext, curFile.getAbsolutePath(), pathOutNew + curNameFile);
+
+                continue;
+            }
 
             BufferedReader in = new BufferedReader(new FileReader(curFile));
-            ZipEntry ze = new ZipEntry(curNameFile);
+            ZipEntry ze = new ZipEntry(pathOutNew + curNameFile);
             zout.putNextEntry(ze);
             String c;
             while ((c = in.readLine()) != null){
@@ -43,9 +64,6 @@ public class zip {
             zout.closeEntry();
             in.close();
         }
-
-        out.close();
-
 
     }
 

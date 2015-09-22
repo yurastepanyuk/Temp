@@ -38,7 +38,7 @@ public class ReturnTank extends JPanel {
 
             try{
                 this.image = ImageIO.read(new File(IMAGE_NAME));
-                rotateImage();
+                rotateImage(90);
             } catch (IOException e) {
                 System.out.println("Can't find image: " + IMAGE_NAME);
                 e.printStackTrace();
@@ -46,7 +46,7 @@ public class ReturnTank extends JPanel {
 
         }
 
-        public void rotateImage(){
+        public void rotateImage(int rotate){
 
             double degress = 0;
 
@@ -55,7 +55,7 @@ public class ReturnTank extends JPanel {
             Graphics2D graphics2D = (Graphics2D)bufferedImage.getGraphics();
             //graphics2D.setComposite();
 
-            degress = 90;
+            degress = rotate;
 
             graphics2D.rotate(Math.toRadians(degress), icon.getIconWidth()/2, icon.getIconHeight()/2);
             graphics2D.drawImage(this.image,0,0,new ImageObserver() {
@@ -213,6 +213,14 @@ public class ReturnTank extends JPanel {
         }
 
         if (tank.x >= WIDTH-80){
+            int i = 180;
+            while (i > 0){
+                tank.rotateImage(-45);
+                repaint();
+                i -=45;
+                sleep(500);
+           }
+
             gate.actionGate = ActionGate.CLOSE;
             synchronized (gate){
                 System.out.println("Tank: back home, waiting a new task ");
