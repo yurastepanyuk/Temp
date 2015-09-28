@@ -13,7 +13,10 @@ public class Launcher {
 
         list.add("Bunny");
 
+        list.remove(1);
         list.remove(0);
+
+        list.add("Chiken");
 
         for (Object object : list) {
             System.out.println((String)object);

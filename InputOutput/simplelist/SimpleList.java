@@ -43,6 +43,55 @@ public class SimpleList<T> implements Iterable<Object> {
 
     public void remove(int idx){
         removeDataByIndex(idx);
+        optimizationData();
+    }
+
+    private void optimizationData() {
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+
+        try(FileReader fileReader                   = new FileReader(DATA);
+            BufferedReader inputBufferedFileReader  = new BufferedReader(fileReader)) {
+
+            String strData;
+
+            int mustIdx = 0;
+
+            while ((strData = inputBufferedFileReader.readLine()) != null){
+
+                String curData = strData.substring(2);
+                if (curData.isEmpty()) {
+                    idxLast--;
+                    continue;
+                }
+
+                int currentIdx = Integer.valueOf(strData.substring(0, 1));
+
+                if (currentIdx != mustIdx) {
+                    byteOutputStream.write((String.valueOf(mustIdx) +  ";").getBytes());
+                    byteOutputStream.write(curData.getBytes());
+                    byteOutputStream.write((byte)'\n');
+
+                } else {
+
+                    byteOutputStream.write(strData.getBytes());
+                    byteOutputStream.write((byte)'\n');
+                }
+
+                mustIdx++;
+
+            }
+
+            outFileWriter = new FileWriter(DATA, false);
+            byte[] tempData = byteOutputStream.toByteArray();
+            for (int i = 0; i < tempData.length; i++) {
+                outFileWriter.write((char) tempData[i]);
+            }
+            outFileWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private int getLenghtData(){
