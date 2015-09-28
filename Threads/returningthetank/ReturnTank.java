@@ -67,6 +67,12 @@ public class ReturnTank extends JPanel {
             this.image = bufferedImage;
         }
 
+        public void parkingTank() {
+            this.x      = -100;
+            this.y      = -100;
+            this.width  = 50;
+            this.hight  = 50;
+        }
     }
 
     public class Gates{
@@ -75,7 +81,7 @@ public class ReturnTank extends JPanel {
         public int   y;
         public int   hight;
         public int   openGates = 100;
-        public int   closeGate = WIDTH-50;
+        public int   closeGate = 360;
 
         public ActionGate actionGate;
 
@@ -130,6 +136,8 @@ public class ReturnTank extends JPanel {
             @Override
             public void run() {
 
+                while (true){
+
                 try{
                     synchronized (gate){
                         System.out.println("Gate: waiting the tank");
@@ -157,6 +165,7 @@ public class ReturnTank extends JPanel {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                }
 
 
             }
@@ -168,7 +177,7 @@ public class ReturnTank extends JPanel {
         if (gate.actionGate == ActionGate.OPEN){
             while (gate.hight > gate.openGates){
                 gate.hight--;
-                sleep(30);
+                sleep(20);
             }
 
             if (gate.hight <= gate.openGates){
@@ -178,15 +187,29 @@ public class ReturnTank extends JPanel {
         } else if (gate.actionGate == ActionGate.CLOSE){
             while (gate.hight <= gate.closeGate){
                 gate.hight++;
-                sleep(30);
+                sleep(20);
             }
 
             if (gate.hight >= gate.closeGate){
                 gate.isOpen = false;
+
+                nextTankReturn();
+
             }
 
         }
 
+    }
+
+    private void nextTankReturn() {
+        tank = new Tanchik();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                moveTank();
+            }
+        }).start();
+        //moveTank();
     }
 
     public void moveTank(){
@@ -213,13 +236,6 @@ public class ReturnTank extends JPanel {
         }
 
         if (tank.x >= WIDTH-80){
-            int i = 180;
-            while (i > 0){
-                tank.rotateImage(-45);
-                repaint();
-                i -=45;
-                sleep(500);
-           }
 
             gate.actionGate = ActionGate.CLOSE;
             synchronized (gate){
@@ -227,6 +243,16 @@ public class ReturnTank extends JPanel {
                 System.out.println("Gate: closing the gate");
                 gate.notify();
             }
+
+            int i = 180;
+            while (i > 0){
+                tank.rotateImage(-45);
+                repaint();
+                i -=45;
+                sleep(750);
+           }
+
+            tank.parkingTank();
 
         }
     }
